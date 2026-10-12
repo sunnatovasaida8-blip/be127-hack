@@ -35,24 +35,34 @@
             margin-bottom: 15px;
         }
 
-        .icon-btn {
-            background: #151d30;
-            border: 1px solid #253352;
+        /* LIQUID GLASS BUTTON STYLE */
+        .glass-btn {
+            background: rgba(21, 29, 48, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
             width: 42px;
             height: 42px;
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #2a8bf2;
+            color: #38bdf8;
             font-size: 20px;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(42, 139, 242, 0.2);
             text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .glass-btn:active {
+            transform: scale(0.92);
         }
 
         .status-badge {
-            background: #062d18;
+            background: rgba(6, 45, 24, 0.7);
+            backdrop-filter: blur(8px);
             border: 1px solid #15803d;
             padding: 4px 14px;
             border-radius: 20px;
@@ -64,17 +74,26 @@
             gap: 6px;
         }
 
-        .status-dot {
+        /* O'CHIB YONUVCHI YASHIL DUMALOQ */
+        .status-dot-pulse {
             width: 8px;
             height: 8px;
             background: #22c55e;
             border-radius: 50%;
-            box-shadow: 0 0 8px #22c55e;
+            box-shadow: 0 0 10px #22c55e;
+            animation: pulse-green 1.2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-green {
+            0% { opacity: 1; transform: scale(1); box-shadow: 0 0 10px #22c55e; }
+            50% { opacity: 0.3; transform: scale(0.85); box-shadow: 0 0 2px #22c55e; }
+            100% { opacity: 1; transform: scale(1); box-shadow: 0 0 10px #22c55e; }
         }
 
         .lang-btn {
-            background: #151d30;
-            border: 1px solid #253352;
+            background: rgba(21, 29, 48, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             padding: 8px 12px;
             border-radius: 20px;
             color: #ffffff;
@@ -87,16 +106,18 @@
 
         /* CARD MAIN CONTAINER */
         .app-card {
-            background: linear-gradient(180deg, #0e172a 0%, #090e1a 100%);
-            border: 1px solid #1e293b;
+            background: linear-gradient(180deg, rgba(14, 23, 42, 0.85) 0%, rgba(9, 14, 26, 0.95) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
             width: 100%;
             max-width: 380px;
             padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-bottom: 15px;
         }
 
         .card-header {
@@ -107,12 +128,23 @@
             margin-bottom: 20px;
         }
 
+        /* COPYABLE PROMO TITLE */
         .promo-title {
             color: #38bdf8;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 900;
             letter-spacing: 2px;
             text-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+            cursor: pointer;
+            transition: transform 0.2s;
+            padding: 4px 10px;
+            border-radius: 10px;
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px dashed rgba(56, 189, 248, 0.3);
+        }
+
+        .promo-title:active {
+            transform: scale(0.95);
         }
 
         /* GAME GRID */
@@ -125,8 +157,9 @@
         }
 
         .game-item {
-            background: #111a2e;
-            border: 1px solid #1e2d4a;
+            background: rgba(17, 26, 46, 0.7);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
             overflow: hidden;
             cursor: pointer;
@@ -140,7 +173,7 @@
         .game-img {
             width: 100%;
             height: 90px;
-            background: #1e293b;
+            background: rgba(30, 41, 59, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -193,18 +226,19 @@
             flex-direction: column;
             align-items: center;
             text-decoration: none;
-            background: #151d30;
-            border: 1px solid #253352;
+            background: rgba(21, 29, 48, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             padding: 6px 12px;
             border-radius: 12px;
             color: #38bdf8;
             font-size: 11px;
             font-weight: 700;
-            box-shadow: 0 0 10px rgba(42, 139, 242, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         .active-users {
-            background: #082f49;
+            background: rgba(8, 47, 73, 0.8);
             border: 1px solid #0369a1;
             padding: 8px 12px;
             border-radius: 20px;
@@ -215,15 +249,54 @@
             gap: 6px;
         }
 
-        .green-dot {
-            width: 8px;
-            height: 8px;
-            background: #22c55e;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #22c55e;
+        /* AVIATOR PREDICTOR CARD */
+        .aviator-card {
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.15) 0%, rgba(15, 23, 42, 0.9) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(244, 63, 94, 0.4);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 380px;
+            padding: 18px;
+            box-shadow: 0 10px 30px rgba(244, 63, 94, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
-        /* O'YIN SAHIFASI */
+        .aviator-title {
+            color: #f43f5e;
+            font-size: 22px;
+            font-weight: 900;
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 12px rgba(244, 63, 94, 0.5);
+        }
+
+        .btn-aviator-signal {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #f43f5e, #be123c);
+            border: none;
+            border-radius: 14px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 4px 18px rgba(244, 63, 94, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .btn-aviator-signal:active {
+            transform: scale(0.96);
+        }
+
+        /* O'YIN SAHifASI */
         .game-page {
             display: none;
             width: 100%;
@@ -250,8 +323,8 @@
         }
 
         .game-display {
-            background: #0f172a;
-            border: 1px solid #1e293b;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 20px;
             padding: 15px;
             width: 100%;
@@ -269,108 +342,6 @@
             font-weight: 900;
             margin-bottom: 10px;
             color: #38bdf8;
-        }
-
-        /* THIMBLES BOARD */
-        .thimbles-mode-btns {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            width: 100%;
-            justify-content: center;
-        }
-        .mode-btn {
-            flex: 1;
-            padding: 10px;
-            border-radius: 10px;
-            border: none;
-            font-weight: bold;
-            font-size: 12px;
-            cursor: pointer;
-            color: #fff;
-        }
-        .btn-green-mode { background: #15803d; }
-        .btn-blue-mode { background: #0284c7; }
-
-        .thimbles-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 15px 0;
-            width: 100%;
-        }
-        .thimble-cup {
-            width: 75px;
-            height: 85px;
-            background: linear-gradient(180deg, #d97706, #b45309);
-            border: 2px solid #f59e0b;
-            border-radius: 15px 15px 5px 5px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            padding-bottom: 10px;
-            font-size: 26px;
-            transition: transform 0.4s ease;
-            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
-        }
-        .thimble-cup.open {
-            transform: translateY(-15px);
-            border-color: #22c55e;
-            box-shadow: 0 0 20px #22c55e;
-        }
-
-        /* GRID BOARDS (PASTDAN TEPAGA) */
-        .board-wrap {
-            display: flex;
-            gap: 8px;
-            width: 100%;
-            align-items: center;
-        }
-        .board-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            flex: 1;
-        }
-        .row-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 4px;
-        }
-        .cell {
-            background: #291b11;
-            border: 1px solid #452614;
-            height: 32px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-        }
-        .cell.active {
-            background: #15803d;
-            border-color: #22c55e;
-            box-shadow: 0 0 8px #22c55e;
-        }
-        .odds-col {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        .odd-badge {
-            background: #1e293b;
-            border: 1px solid #eab308;
-            color: #eab308;
-            font-size: 9px;
-            font-weight: 800;
-            padding: 9px 4px;
-            border-radius: 5px;
-            text-align: center;
-        }
-        .odd-badge.highlight {
-            background: #15803d;
-            border-color: #22c55e;
-            color: #fff;
         }
 
         .btn-scan {
@@ -392,7 +363,7 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(4, 8, 16, 0.85);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
             display: none;
             align-items: center;
             justify-content: center;
@@ -416,6 +387,14 @@
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 15px;
+        }
+
+        .modal-body-text {
+            color: #cbd5e1;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
         .modal-input {
@@ -457,23 +436,37 @@
         .btn-close { background: #1e293b; color: #94a3b8; }
         .btn-save { background: linear-gradient(135deg, #38bdf8, #2563eb); color: #fff; }
 
+        /* TOAST NOTIFICATION */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            background: #22c55e;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+            box-shadow: 0 5px 15px rgba(34, 197, 94, 0.4);
+            display: none;
+            z-index: 200;
+        }
     </style>
 </head>
 <body>
 
     <!-- TOP BAR -->
     <div class="top-bar">
-        <div class="icon-btn" onclick="openModal('idModal')">⚙️</div>
-        <div class="status-badge"><div class="status-dot"></div> Online</div>
+        <div class="glass-btn" onclick="openModal('idModal')">⚙️</div>
+        <div class="status-badge"><div class="status-dot-pulse"></div> Online</div>
         <div class="lang-btn" onclick="openModal('langModal')">🌐 <span>UZ</span></div>
-        <a href="https://t.me/BE127BONUS" target="_blank" class="icon-btn">✈️</a>
+        <a href="https://t.me/ZYNEX2_x27" target="_blank" class="glass-btn" style="text-decoration: none;">💬</a>
     </div>
 
     <!-- MAIN APP HUB -->
     <div class="app-card" id="mainHub">
         <div class="card-header">
-            <a href="https://t.me/BE127BONUS" target="_blank" class="icon-btn" style="text-decoration: none;">✈️</a>
-            <div class="promo-title">BE127</div>
+            <div class="glass-btn" onclick="openModal('promoInfoModal')">🔊</div>
+            <div class="promo-title" onclick="copyPromo()" title="Bosib nusxalang">BE127</div>
             <div style="width: 42px;"></div>
         </div>
 
@@ -507,12 +500,21 @@
                 <span style="font-size: 16px;">🛫</span>
                 <span>Telegram</span>
             </a>
-            <div class="icon-btn" onclick="openModal('idModal')">💻</div>
+            <div class="glass-btn" onclick="openModal('idModal')">💻</div>
             <div class="active-users">
-                <div class="green-dot"></div>
-                <span>Faollik: <b>~172</b></span>
+                <div class="status-dot-pulse"></div>
+                <span>Bot faol: <b>95%</b></span>
             </div>
         </div>
+    </div>
+
+    <!-- AVIATOR PREDICTOR CARD -->
+    <div class="aviator-card" id="aviatorCard">
+        <div class="aviator-title">
+            <span>✈️</span> AVIATOR Predictor
+        </div>
+        <p style="color: #cbd5e1; font-size: 12px; margin-bottom: 12px;">Sun'iy intellekt tahlili asosida Aviator signalini oling</p>
+        <button class="btn-aviator-signal" onclick="openGame('Aviator')">SIGNAL OLISH</button>
     </div>
 
     <!-- O'YIN SAHIFASI -->
@@ -545,7 +547,20 @@
         </div>
     </div>
 
-    <!-- MODAL 2: TIL -->
+    <!-- MODAL 2: PROMO INFO (🔊 BUSHMASIDA) -->
+    <div class="modal-overlay" id="promoInfoModal">
+        <div class="modal-box">
+            <div style="font-size: 40px; margin-bottom: 10px;">📢</div>
+            <div class="modal-title" style="color: #38bdf8;">TIZIMNI FAOL'LASHTIRISH</div>
+            <div class="modal-body-text">
+                Linebet ilovasini yuklab olib, <b style="color: #38bdf8;">BE127</b> promokodi orqali yangi account oching va hisobingizni kamida <b style="color: #22c55e;">60.000 so'm</b> ga to'ldiring.<br><br>
+                Shunda <b style="color: #38bdf8;">BE127-HACK</b> algoritmi 100% aniq va bexato ishlaydi!
+            </div>
+            <button class="btn-modal btn-save" style="width: 100%;" onclick="closeModal('promoInfoModal')">Tushundim</button>
+        </div>
+    </div>
+
+    <!-- MODAL 3: TIL -->
     <div class="modal-overlay" id="langModal">
         <div class="modal-box">
             <div class="modal-title">Tilni tanlang</div>
@@ -557,6 +572,9 @@
         </div>
     </div>
 
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast" id="toastMsg">BE127 nusxalandi! 📋</div>
+
     <script>
         if (window.Telegram && window.Telegram.WebApp) {
             window.Telegram.WebApp.ready();
@@ -564,18 +582,26 @@
         }
 
         const mainHub = document.getElementById('mainHub');
+        const aviatorCard = document.getElementById('aviatorCard');
         const gamePage = document.getElementById('gamePage');
         const currentGameTitle = document.getElementById('currentGameTitle');
         const gameBoardContainer = document.getElementById('gameBoardContainer');
         const gameHint = document.getElementById('gameHint');
         const scanBtn = document.getElementById('scanBtn');
         const accountStatus = document.getElementById('accountStatus');
+        const toastMsg = document.getElementById('toastMsg');
 
         let currentStep = 0;
         let thimblesMode = '2.91x';
 
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        function copyPromo() {
+            navigator.clipboard.writeText('BE127');
+            toastMsg.style.display = 'block';
+            setTimeout(() => { toastMsg.style.display = 'none'; }, 2000);
+        }
 
         function saveId() {
             const val = document.getElementById('linebetIdInput').value;
@@ -587,6 +613,7 @@
 
         function openGame(gameName) {
             mainHub.style.display = 'none';
+            aviatorCard.style.display = 'none';
             gamePage.style.display = 'flex';
             currentGameTitle.innerText = gameName.toUpperCase();
             currentStep = 0;
@@ -596,6 +623,7 @@
         function closeGame() {
             gamePage.style.display = 'none';
             mainHub.style.display = 'flex';
+            aviatorCard.style.display = 'flex';
         }
 
         function renderBoard(gameName) {
@@ -605,56 +633,60 @@
             if (gameName === 'Thimbles') {
                 scanBtn.innerText = "START";
                 gameBoardContainer.innerHTML = `
-                    <div class="thimbles-mode-btns">
-                        <button class="mode-btn btn-green-mode" id="btn145" onclick="setThimblesMode('1.45x')">1.45x (2 shar)</button>
-                        <button class="mode-btn btn-blue-mode" id="btn291" onclick="setThimblesMode('2.91x')">2.91x (1 shar)</button>
+                    <div style="display:flex; gap:10px; margin-bottom:15px; width:100%;">
+                        <button class="btn-modal btn-save" style="background:#15803d;" id="btn145" onclick="setThimblesMode('1.45x')">1.45x (2 shar)</button>
+                        <button class="btn-modal btn-save" style="background:#0284c7;" id="btn291" onclick="setThimblesMode('2.91x')">2.91x (1 shar)</button>
                     </div>
-                    <div class="thimbles-container">
-                        <div class="thimble-cup" id="cup1"></div>
-                        <div class="thimble-cup" id="cup2"></div>
-                        <div class="thimble-cup" id="cup3"></div>
+                    <div style="display:flex; justify-content:center; gap:15px; margin:15px 0;">
+                        <div class="glass-btn" style="width:75px; height:85px; border-radius:15px; font-size:30px;" id="cup1">🔔</div>
+                        <div class="glass-btn" style="width:75px; height:85px; border-radius:15px; font-size:30px;" id="cup2">🔔</div>
+                        <div class="glass-btn" style="width:75px; height:85px; border-radius:15px; font-size:30px;" id="cup3">🔔</div>
                     </div>
                 `;
                 gameHint.innerText = "Rejimni tanlang va START ni bosing";
             } 
             else if (gameName === 'Kamikaze') {
-                const odds = ["x2.5", "x2.0", "x1.6", "x1.4", "x1.2"]; // Pastdan tepaga
-                let html = '<div class="board-wrap"><div class="board-grid">';
+                const odds = ["x2.5", "x2.0", "x1.6", "x1.4", "x1.2"];
+                let html = '<div style="display:flex; gap:8px; width:100%;"><div style="display:flex; flex-direction:column; gap:4px; flex:1;">';
                 for(let r=4; r>=0; r--) {
-                    html += '<div class="row-grid">';
-                    for(let c=0; c<5; c++) {
-                        html += `<div class="cell" id="cell_${r}_${c}">🟤</div>`;
-                    }
+                    html += '<div style="display:grid; grid-template-columns:repeat(5,1fr); gap:4px;">';
+                    for(let c=0; c<5; c++) html += `<div style="background:#291b11; border:1px solid #452614; height:32px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:13px;" id="cell_${r}_${c}">🟤</div>`;
                     html += '</div>';
                 }
-                html += '</div><div class="odds-col">';
+                html += '</div><div style="display:flex; flex-direction:column; gap:4px;">';
                 odds.forEach((o, idx) => {
-                    const rowNum = 4 - idx;
-                    html += `<div class="odd-badge" id="odd_${rowNum}">${o}</div>`;
+                    html += `<div style="background:#1e293b; border:1px solid #eab308; color:#eab308; font-size:9px; font-weight:800; padding:9px 4px; border-radius:5px;" id="odd_${4-idx}">${o}</div>`;
                 });
                 html += '</div></div>';
                 gameBoardContainer.innerHTML = html;
                 gameHint.innerText = "START ni bosing va 1.2x dan boshlang";
             } 
             else if (gameName === 'Apple') {
-                const odds = ["x6.71", "x4.02", "x2.41", "x1.93", "x1.56", "x1.23"]; // Pastdan tepaga
-                let html = '<div class="board-wrap"><div class="board-grid">';
+                const odds = ["x6.71", "x4.02", "x2.41", "x1.93", "x1.56", "x1.23"];
+                let html = '<div style="display:flex; gap:8px; width:100%;"><div style="display:flex; flex-direction:column; gap:4px; flex:1;">';
                 for(let r=5; r>=0; r--) {
-                    html += '<div class="row-grid">';
-                    for(let c=0; c<5; c++) {
-                        html += `<div class="cell" id="cell_${r}_${c}">🟤</div>`;
-                    }
+                    html += '<div style="display:grid; grid-template-columns:repeat(5,1fr); gap:4px;">';
+                    for(let c=0; c<5; c++) html += `<div style="background:#291b11; border:1px solid #452614; height:32px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:13px;" id="cell_${r}_${c}">🟤</div>`;
                     html += '</div>';
                 }
-                html += '</div><div class="odds-col">';
+                html += '</div><div style="display:flex; flex-direction:column; gap:4px;">';
                 odds.forEach((o, idx) => {
-                    const rowNum = 5 - idx;
-                    html += `<div class="odd-badge" id="odd_${rowNum}">${o}</div>`;
+                    html += `<div style="background:#1e293b; border:1px solid #eab308; color:#eab308; font-size:9px; font-weight:800; padding:9px 4px; border-radius:5px;" id="odd_${5-idx}">${o}</div>`;
                 });
                 html += '</div></div>';
                 gameBoardContainer.innerHTML = html;
                 gameHint.innerText = "START ni bosing va 1.23x dan boshlang";
             } 
+            else if (gameName === 'Aviator') {
+                scanBtn.innerText = "SIGNAL OLISH";
+                const randomOdd = (Math.random() * (4.2 - 1.25) + 1.25).toFixed(2);
+                gameBoardContainer.innerHTML = `
+                    <div style="font-size: 50px; margin-bottom: 10px;">✈️</div>
+                    <div style="font-size: 38px; font-weight: 900; color: #f43f5e; text-shadow: 0 0 15px rgba(244,63,94,0.6);" id="aviatorOddVal">x${randomOdd}</div>
+                    <div style="color: #22c55e; font-size: 13px; font-weight: bold; margin-top: 10px;">Analiz muvaffaqiyatli!</div>
+                `;
+                gameHint.innerText = "Aviator xavfsiz uchish koeffitsiyenti";
+            }
             else if (gameName === 'Swamp Land') {
                 scanBtn.innerText = "SCAN";
                 gameBoardContainer.innerHTML = `
@@ -667,38 +699,34 @@
 
         function setThimblesMode(mode) {
             thimblesMode = mode;
-            document.getElementById('btn145').style.opacity = mode === '1.45x' ? '1' : '0.4';
-            document.getElementById('btn291').style.opacity = mode === '2.91x' ? '1' : '0.4';
             resetSignal();
         }
 
         function resetSignal() {
             currentStep = 0;
             const name = currentGameTitle.innerText;
-            if(name === 'THIMBLES') {
-                document.querySelectorAll('.thimble-cup').forEach(c => { c.classList.remove('open'); c.innerHTML = ''; });
-                gameHint.innerText = `${thimblesMode} rejimi tanlandi. START ni bosing.`;
-            } else {
-                renderBoard(name.charAt(0) + name.slice(1).toLowerCase());
-            }
+            renderBoard(name.charAt(0) + name.slice(1).toLowerCase());
         }
 
         function nextStepSignal() {
             const name = currentGameTitle.innerText;
 
-            if (name === 'THIMBLES') {
-                document.querySelectorAll('.thimble-cup').forEach(c => { c.classList.remove('open'); c.innerHTML = ''; });
+            if (name === 'AVIATOR') {
+                const odd = (Math.random() * (5.5 - 1.2) + 1.2).toFixed(2);
+                document.getElementById('aviatorOddVal').innerText = `x${odd}`;
+                gameHint.innerText = "Yangi Aviator koeffitsiyenti olindi!";
+            }
+            else if (name === 'THIMBLES') {
+                document.getElementById('cup1').innerHTML = '🔔';
+                document.getElementById('cup2').innerHTML = '🔔';
+                document.getElementById('cup3').innerHTML = '🔔';
                 if (thimblesMode === '1.45x') {
-                    document.getElementById('cup1').classList.add('open');
                     document.getElementById('cup1').innerHTML = '⚪️';
-                    document.getElementById('cup3').classList.add('open');
                     document.getElementById('cup3').innerHTML = '⚪️';
                     gameHint.innerText = "1.45x: 2 ta shar joylashuvi ko'rsatildi!";
                 } else {
                     const pos = Math.floor(Math.random() * 3) + 1;
-                    const cup = document.getElementById(`cup${pos}`);
-                    cup.classList.add('open');
-                    cup.innerHTML = '⚪️';
+                    document.getElementById(`cup${pos}`).innerHTML = '⚪️';
                     gameHint.innerText = `2.91x: ${pos}-angishvonada shar topildi!`;
                 }
             }
@@ -709,26 +737,24 @@
                     return;
                 }
 
-                // Eski belgilarni tozalash
                 for(let r=0; r<maxRows; r++) {
                     for(let c=0; c<5; c++) {
                         const el = document.getElementById(`cell_${r}_${c}`);
-                        if(el) { el.classList.remove('active'); el.innerHTML = '🟤'; }
+                        if(el) { el.style.background = '#291b11'; el.innerHTML = '🟤'; }
                     }
                     const badge = document.getElementById(`odd_${r}`);
-                    if(badge) badge.classList.remove('highlight');
+                    if(badge) badge.style.background = '#1e293b';
                 }
 
-                // Joriy qatorni yoritish (Pastdan boshlanadi: 0, 1, 2...)
                 const col = Math.floor(Math.random() * 5);
                 const cell = document.getElementById(`cell_${currentStep}_${col}`);
                 if(cell) {
-                    cell.classList.add('active');
+                    cell.style.background = '#15803d';
                     cell.innerHTML = name === 'APPLE' ? '🍎' : '✈️';
                 }
 
                 const activeOdd = document.getElementById(`odd_${currentStep}`);
-                if(activeOdd) activeOdd.classList.add('highlight');
+                if(activeOdd) activeOdd.style.background = '#15803d';
 
                 gameHint.innerText = `Qator ${currentStep + 1} ko'rsatildi. Keyingisi uchun yana bosing!`;
                 currentStep++;
