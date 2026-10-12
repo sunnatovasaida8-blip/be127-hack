@@ -156,7 +156,7 @@
             text-align: left;
         }
 
-        /* BRANDING FOOTER TEXTS */
+        /* BRANDING TEXTS */
         .branding-section {
             width: 100%;
             text-align: center;
@@ -257,7 +257,7 @@
             width: 100%;
             text-align: center;
             margin-bottom: 15px;
-            min-height: 300px;
+            min-height: 330px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -271,7 +271,7 @@
             color: #38bdf8;
         }
 
-        /* THIMBLES MODES */
+        /* THIMBLES BOARD */
         .thimbles-mode-btns {
             display: flex;
             gap: 10px;
@@ -285,13 +285,12 @@
             border-radius: 10px;
             border: none;
             font-weight: bold;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             color: #fff;
         }
         .btn-green-mode { background: #15803d; }
         .btn-blue-mode { background: #0284c7; }
-        .mode-btn.inactive { opacity: 0.4; }
 
         .thimbles-container {
             display: flex;
@@ -320,7 +319,7 @@
             box-shadow: 0 0 20px #22c55e;
         }
 
-        /* APPLE & KAMIKAZE BOARDS */
+        /* GRID BOARDS (PASTDAN TEPAGA) */
         .board-wrap {
             display: flex;
             gap: 8px;
@@ -328,10 +327,15 @@
             align-items: center;
         }
         .board-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+        }
+        .row-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 4px;
-            flex: 1;
         }
         .cell {
             background: #291b11;
@@ -359,7 +363,7 @@
             color: #eab308;
             font-size: 9px;
             font-weight: 800;
-            padding: 5px 3px;
+            padding: 9px 4px;
             border-radius: 5px;
             text-align: center;
         }
@@ -383,7 +387,7 @@
             box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4);
         }
 
-        /* MODAL OYNALAR */
+        /* MODALS */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -412,14 +416,6 @@
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 15px;
-        }
-
-        .modal-body-text {
-            color: #cbd5e1;
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            text-align: center;
         }
 
         .modal-input {
@@ -458,16 +454,8 @@
             font-size: 14px;
         }
 
-        .btn-close {
-            background: #1e293b;
-            color: #94a3b8;
-        }
-
-        .btn-save {
-            background: linear-gradient(135deg, #38bdf8, #2563eb);
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
-        }
+        .btn-close { background: #1e293b; color: #94a3b8; }
+        .btn-save { background: linear-gradient(135deg, #38bdf8, #2563eb); color: #fff; }
 
     </style>
 </head>
@@ -547,8 +535,8 @@
     <div class="modal-overlay" id="idModal">
         <div class="modal-box">
             <div style="font-size: 40px; margin-bottom: 10px;">💻</div>
-            <div class="modal-title">Linebet ID sozlamalari</div>
-            <input type="number" class="modal-input" placeholder="Linebet ID kiriting" id="linebetIdInput">
+            <div class="modal-title">Linebet / BetWinner ID</div>
+            <input type="number" class="modal-input" placeholder="ID raqamingizni kiriting" id="linebetIdInput">
             <div class="account-status" id="accountStatus">Account faol! ✅</div>
             <div class="modal-btns">
                 <button class="btn-modal btn-close" onclick="closeModal('idModal')">Yopish</button>
@@ -584,7 +572,7 @@
         const accountStatus = document.getElementById('accountStatus');
 
         let currentStep = 0;
-        let thimblesMode = '2.91x'; // '1.45x' yoki '2.91x'
+        let thimblesMode = '2.91x';
 
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
@@ -594,7 +582,7 @@
             if(val) {
                 accountStatus.style.display = 'block';
                 setTimeout(() => { closeModal('idModal'); }, 1200);
-            } else { alert("Iltimos, Linebet ID kiriting!"); }
+            } else { alert("Iltimos, ID raqamingizni kiriting!"); }
         }
 
         function openGame(gameName) {
@@ -627,29 +615,53 @@
                         <div class="thimble-cup" id="cup3"></div>
                     </div>
                 `;
-                gameHint.innerText = "Koeffitsiyentni tanlang va START ni bosing";
+                gameHint.innerText = "Rejimni tanlang va START ni bosing";
             } 
             else if (gameName === 'Kamikaze') {
-                const odds = ["x2.5", "x2.0", "x1.6", "x1.4", "x1.2"];
+                const odds = ["x2.5", "x2.0", "x1.6", "x1.4", "x1.2"]; // Pastdan tepaga
                 let html = '<div class="board-wrap"><div class="board-grid">';
-                for(let i=0; i<25; i++) html += `<div class="cell" id="cell_${i}">🟤</div>`;
+                for(let r=4; r>=0; r--) {
+                    html += '<div class="row-grid">';
+                    for(let c=0; c<5; c++) {
+                        html += `<div class="cell" id="cell_${r}_${c}">🟤</div>`;
+                    }
+                    html += '</div>';
+                }
                 html += '</div><div class="odds-col">';
-                odds.forEach((o, idx) => html += `<div class="odd-badge" id="odd_${idx}">${o}</div>`);
+                odds.forEach((o, idx) => {
+                    const rowNum = 4 - idx;
+                    html += `<div class="odd-badge" id="odd_${rowNum}">${o}</div>`;
+                });
                 html += '</div></div>';
                 gameBoardContainer.innerHTML = html;
                 gameHint.innerText = "START ni bosing va 1.2x dan boshlang";
             } 
             else if (gameName === 'Apple') {
-                const odds = ["x6.71", "x4.02", "x2.41", "x1.93", "x1.56", "x1.23"];
+                const odds = ["x6.71", "x4.02", "x2.41", "x1.93", "x1.56", "x1.23"]; // Pastdan tepaga
                 let html = '<div class="board-wrap"><div class="board-grid">';
-                for(let i=0; i<30; i++) html += `<div class="cell" id="cell_${i}">🟤</div>`;
+                for(let r=5; r>=0; r--) {
+                    html += '<div class="row-grid">';
+                    for(let c=0; c<5; c++) {
+                        html += `<div class="cell" id="cell_${r}_${c}">🟤</div>`;
+                    }
+                    html += '</div>';
+                }
                 html += '</div><div class="odds-col">';
-                odds.forEach((o, idx) => html += `<div class="odd-badge" id="odd_${idx}">${o}</div>`);
+                odds.forEach((o, idx) => {
+                    const rowNum = 5 - idx;
+                    html += `<div class="odd-badge" id="odd_${rowNum}">${o}</div>`;
+                });
                 html += '</div></div>';
                 gameBoardContainer.innerHTML = html;
                 gameHint.innerText = "START ni bosing va 1.23x dan boshlang";
-            } else {
-                gameBoardContainer.innerHTML = `<div style="font-size:40px; margin:20px;">🐸</div>`;
+            } 
+            else if (gameName === 'Swamp Land') {
+                scanBtn.innerText = "SCAN";
+                gameBoardContainer.innerHTML = `
+                    <div style="font-size: 50px; margin: 15px 0;">🐸</div>
+                    <div style="font-size: 22px; font-weight: 900; color: #38bdf8;" id="swampOutput">Katak: -</div>
+                `;
+                gameHint.innerText = "Swamp Land xavfsiz bargini ko'rish uchun SCAN ni bosing";
             }
         }
 
@@ -667,7 +679,7 @@
                 document.querySelectorAll('.thimble-cup').forEach(c => { c.classList.remove('open'); c.innerHTML = ''; });
                 gameHint.innerText = `${thimblesMode} rejimi tanlandi. START ni bosing.`;
             } else {
-                renderBoard(name);
+                renderBoard(name.charAt(0) + name.slice(1).toLowerCase());
             }
         }
 
@@ -677,20 +689,17 @@
             if (name === 'THIMBLES') {
                 document.querySelectorAll('.thimble-cup').forEach(c => { c.classList.remove('open'); c.innerHTML = ''; });
                 if (thimblesMode === '1.45x') {
-                    // 2 ta shar
-                    const pos1 = 1, pos2 = 3;
-                    document.getElementById(`cup${pos1}`).classList.add('open');
-                    document.getElementById(`cup${pos1}`).innerHTML = '⚪️';
-                    document.getElementById(`cup${pos2}`).classList.add('open');
-                    document.getElementById(`cup${pos2}`).innerHTML = '⚪️';
-                    gameHint.innerText = "1.45x: 2 ta shar ko'rsatildi!";
+                    document.getElementById('cup1').classList.add('open');
+                    document.getElementById('cup1').innerHTML = '⚪️';
+                    document.getElementById('cup3').classList.add('open');
+                    document.getElementById('cup3').innerHTML = '⚪️';
+                    gameHint.innerText = "1.45x: 2 ta shar joylashuvi ko'rsatildi!";
                 } else {
-                    // 2.91x - 1 ta shar
                     const pos = Math.floor(Math.random() * 3) + 1;
                     const cup = document.getElementById(`cup${pos}`);
                     cup.classList.add('open');
                     cup.innerHTML = '⚪️';
-                    gameHint.innerText = `2.91x: ${pos}-angishvonada 1 ta shar topildi!`;
+                    gameHint.innerText = `2.91x: ${pos}-angishvonada shar topildi!`;
                 }
             }
             else if (name === 'APPLE' || name === 'KAMIKAZE') {
@@ -700,20 +709,19 @@
                     return;
                 }
 
-                // Eski qatorni tozalash
-                for(let i=0; i<30; i++) {
-                    const el = document.getElementById(`cell_${i}`);
-                    if(el) { el.classList.remove('active'); el.innerHTML = '🟤'; }
-                }
-                for(let i=0; i<maxRows; i++) {
-                    const badge = document.getElementById(`odd_${i}`);
+                // Eski belgilarni tozalash
+                for(let r=0; r<maxRows; r++) {
+                    for(let c=0; c<5; c++) {
+                        const el = document.getElementById(`cell_${r}_${c}`);
+                        if(el) { el.classList.remove('active'); el.innerHTML = '🟤'; }
+                    }
+                    const badge = document.getElementById(`odd_${r}`);
                     if(badge) badge.classList.remove('highlight');
                 }
 
-                // Joriy qatorni yoritish
+                // Joriy qatorni yoritish (Pastdan boshlanadi: 0, 1, 2...)
                 const col = Math.floor(Math.random() * 5);
-                const cellIndex = currentStep * 5 + col;
-                const cell = document.getElementById(`cell_${cellIndex}`);
+                const cell = document.getElementById(`cell_${currentStep}_${col}`);
                 if(cell) {
                     cell.classList.add('active');
                     cell.innerHTML = name === 'APPLE' ? '🍎' : '✈️';
@@ -724,6 +732,11 @@
 
                 gameHint.innerText = `Qator ${currentStep + 1} ko'rsatildi. Keyingisi uchun yana bosing!`;
                 currentStep++;
+            }
+            else if (name === 'SWAMP LAND') {
+                const katak = Math.floor(Math.random() * 5) + 1;
+                document.getElementById('swampOutput').innerText = `Xavfsiz barg: ${katak}`;
+                gameHint.innerText = "Swamp Land signali olindi!";
             }
         }
     </script>
