@@ -35,7 +35,6 @@
             margin-bottom: 15px;
         }
 
-        /* LIQUID GLASS BUTTON STYLE */
         .glass-btn {
             background: rgba(21, 29, 48, 0.6);
             backdrop-filter: blur(10px);
@@ -74,7 +73,6 @@
             gap: 6px;
         }
 
-        /* O'CHIB YONUVCHI YASHIL DUMALOQ */
         .status-dot-pulse {
             width: 8px;
             height: 8px;
@@ -128,7 +126,6 @@
             margin-bottom: 20px;
         }
 
-        /* COPYABLE PROMO TITLE */
         .promo-title {
             color: #38bdf8;
             font-size: 26px;
@@ -296,7 +293,7 @@
             transform: scale(0.96);
         }
 
-        /* O'YIN SAHifASI */
+        /* O'YIN SAHIFASI */
         .game-page {
             display: none;
             width: 100%;
@@ -356,6 +353,29 @@
             letter-spacing: 1px;
             cursor: pointer;
             box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4);
+        }
+
+        /* THIMBLES ASL DIZAYN (ANGISHVONA) */
+        .thimble-cup-item {
+            width: 75px;
+            height: 85px;
+            background: linear-gradient(180deg, #d97706, #b45309);
+            border: 2px solid #f59e0b;
+            border-radius: 15px 15px 5px 5px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 12px;
+            font-size: 26px;
+            color: #fff;
+            font-weight: 900;
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+            transition: transform 0.3s;
+        }
+        .thimble-cup-item.open {
+            transform: translateY(-15px);
+            border-color: #22c55e;
+            box-shadow: 0 0 20px #22c55e;
         }
 
         /* MODALS */
@@ -476,8 +496,8 @@
                 <div class="game-name">Apple</div>
             </div>
             <div class="game-item" onclick="openGame('Thimbles')">
-                <div class="game-img">⚪️</div>
-                <div class="game-name">Thimbles ⚪️</div>
+                <div class="game-img">🔔</div>
+                <div class="game-name">Thimbles</div>
             </div>
             <div class="game-item" onclick="openGame('Kamikaze')">
                 <div class="game-img">🛩️</div>
@@ -547,7 +567,7 @@
         </div>
     </div>
 
-    <!-- MODAL 2: PROMO INFO (🔊 BUSHMASIDA) -->
+    <!-- MODAL 2: PROMO INFO -->
     <div class="modal-overlay" id="promoInfoModal">
         <div class="modal-box">
             <div style="font-size: 40px; margin-bottom: 10px;">📢</div>
@@ -638,9 +658,9 @@
                         <button class="btn-modal btn-save" style="background:#0284c7;" id="btn291" onclick="setThimblesMode('2.91x')">2.91x (1 shar)</button>
                     </div>
                     <div style="display:flex; justify-content:center; gap:15px; margin:15px 0;">
-                        <div class="glass-btn" style="width:75px; height:85px; border-radius:15px; font-size:30px;" id="cup1">🔔</div>
-                        <div class="glass-btn" style="width:75px; height:85px; border-radius:15px; font-size:30px;" id="cup2">🔔</div>
-                        <div class="glass-btn" style="width:75px; height:85px; border-radius:15px; font-size:30px;" id="cup3">🔔</div>
+                        <div class="thimble-cup-item" id="cup1">1</div>
+                        <div class="thimble-cup-item" id="cup2">2</div>
+                        <div class="thimble-cup-item" id="cup3">3</div>
                     </div>
                 `;
                 gameHint.innerText = "Rejimni tanlang va START ni bosing";
@@ -679,13 +699,12 @@
             } 
             else if (gameName === 'Aviator') {
                 scanBtn.innerText = "SIGNAL OLISH";
-                const randomOdd = (Math.random() * (4.2 - 1.25) + 1.25).toFixed(2);
                 gameBoardContainer.innerHTML = `
                     <div style="font-size: 50px; margin-bottom: 10px;">✈️</div>
-                    <div style="font-size: 38px; font-weight: 900; color: #f43f5e; text-shadow: 0 0 15px rgba(244,63,94,0.6);" id="aviatorOddVal">x${randomOdd}</div>
-                    <div style="color: #22c55e; font-size: 13px; font-weight: bold; margin-top: 10px;">Analiz muvaffaqiyatli!</div>
+                    <div style="font-size: 38px; font-weight: 900; color: #f43f5e; text-shadow: 0 0 15px rgba(244,63,94,0.6);" id="aviatorOddVal">--</div>
+                    <div style="color: #38bdf8; font-size: 13px; font-weight: bold; margin-top: 10px;" id="aviatorStatusText">Signal olish uchun bosing</div>
                 `;
-                gameHint.innerText = "Aviator xavfsiz uchish koeffitsiyenti";
+                gameHint.innerText = "Aviator tahliliy signali";
             }
             else if (gameName === 'Swamp Land') {
                 scanBtn.innerText = "SCAN";
@@ -712,21 +731,39 @@
             const name = currentGameTitle.innerText;
 
             if (name === 'AVIATOR') {
-                const odd = (Math.random() * (5.5 - 1.2) + 1.2).toFixed(2);
-                document.getElementById('aviatorOddVal').innerText = `x${odd}`;
-                gameHint.innerText = "Yangi Aviator koeffitsiyenti olindi!";
+                scanBtn.disabled = true;
+                const statusTxt = document.getElementById('aviatorStatusText');
+                const oddVal = document.getElementById('aviatorOddVal');
+                
+                statusTxt.innerText = "Analiz qilinmoqda...";
+                oddVal.innerText = "...";
+
+                setTimeout(() => {
+                    const odd = (Math.random() * (5.5 - 1.2) + 1.2).toFixed(2);
+                    oddVal.innerText = `x${odd}`;
+                    statusTxt.innerText = "Analiz muvaffaqiyatli yakunlandi! ✅";
+                    scanBtn.disabled = false;
+                }, 1000);
             }
             else if (name === 'THIMBLES') {
-                document.getElementById('cup1').innerHTML = '🔔';
-                document.getElementById('cup2').innerHTML = '🔔';
-                document.getElementById('cup3').innerHTML = '🔔';
+                document.getElementById('cup1').classList.remove('open');
+                document.getElementById('cup1').innerHTML = '1';
+                document.getElementById('cup2').classList.remove('open');
+                document.getElementById('cup2').innerHTML = '2';
+                document.getElementById('cup3').classList.remove('open');
+                document.getElementById('cup3').innerHTML = '3';
+
                 if (thimblesMode === '1.45x') {
+                    document.getElementById('cup1').classList.add('open');
                     document.getElementById('cup1').innerHTML = '⚪️';
+                    document.getElementById('cup3').classList.add('open');
                     document.getElementById('cup3').innerHTML = '⚪️';
                     gameHint.innerText = "1.45x: 2 ta shar joylashuvi ko'rsatildi!";
                 } else {
                     const pos = Math.floor(Math.random() * 3) + 1;
-                    document.getElementById(`cup${pos}`).innerHTML = '⚪️';
+                    const cup = document.getElementById(`cup${pos}`);
+                    cup.classList.add('open');
+                    cup.innerHTML = '⚪️';
                     gameHint.innerText = `2.91x: ${pos}-angishvonada shar topildi!`;
                 }
             }
