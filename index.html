@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BE127 VIP SIGNALS</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #060913;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+            overflow-x: hidden;
+        }
+
+        /* TOP BAR */
+        .top-bar {
+            width: 100%;
+            max-width: 380px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .icon-btn {
+            background: #151d30;
+            border: 1px solid #253352;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2a8bf2;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(42, 139, 242, 0.2);
+        }
+
+        .status-badge {
+            background: #2a080c;
+            border: 1px solid #7f1d1d;
+            padding: 4px 12px;
+            border-radius: 20px;
+            color: #ef4444;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+        }
+
+        .lang-btn {
+            background: #151d30;
+            border: 1px solid #253352;
+            padding: 8px 12px;
+            border-radius: 20px;
+            color: #ffffff;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        /* CARD MAIN CONTAINER */
+        .app-card {
+            background: linear-gradient(180deg, #0e172a 0%, #090e1a 100%);
+            border: 1px solid #1e293b;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 380px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .promo-title {
+            color: #38bdf8;
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+        }
+
+        /* GAME GRID */
+        .game-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .game-item {
+            background: #111a2e;
+            border: 1px solid #1e2d4a;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .game-item:active {
+            transform: scale(0.96);
+        }
+
+        .game-img {
+            width: 100%;
+            height: 90px;
+            object-fit: cover;
+            background: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .game-name {
+            background: #ffffff;
+            color: #0f172a;
+            padding: 10px;
+            font-weight: 800;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        /* BOTTOM FOOTER */
+        .footer-info {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .active-users {
+            background: #082f49;
+            border: 1px solid #0369a1;
+            padding: 8px 14px;
+            border-radius: 20px;
+            color: #38bdf8;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .green-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #22c55e;
+        }
+
+        /* MODAL OYNALAR */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(4, 8, 16, 0.85);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            padding: 20px;
+        }
+
+        .modal-box {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 24px;
+            padding: 25px 20px;
+            width: 100%;
+            max-width: 340px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+        }
+
+        .modal-title {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 14px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .modal-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-modal {
+            flex: 1;
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-close {
+            background: #1e293b;
+            color: #94a3b8;
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, #38bdf8, #2563eb);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+        }
+
+        /* GAME BOARD PAGE */
+        .game-page {
+            display: none;
+            width: 100%;
+            max-width: 380px;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .game-nav {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .btn-nav {
+            background: linear-gradient(135deg, #38bdf8, #2563eb);
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .game-display {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 20px;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .game-display-title {
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: #38bdf8;
+        }
+
+        .signal-screen {
+            font-size: 45px;
+            font-weight: 900;
+            margin: 25px 0;
+            color: #fff;
+            min-height: 60px;
+        }
+
+        .btn-scan {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #38bdf8, #2563eb);
+            border: none;
+            border-radius: 14px;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="icon-btn" onclick="openModal('idModal')">⚙️</div>
+        <div class="status-badge"><div class="status-dot"></div> Offline</div>
+        <div class="lang-btn" onclick="openModal('langModal')">🌐 <span>UZ</span></div>
+        <div class="icon-btn" onclick="openModal('newsModal')">✈️</div>
+    </div>
+
+    <!-- MAIN APP HUB -->
+    <div class="app-card" id="mainHub">
+        <div class="card-header">
+            <div class="icon-btn" onclick="openModal('newsModal')">🔔</div>
+            <div class="promo-title">BE127</div>
+            <div style="width: 20px;"></div>
+        </div>
+
+        <div class="game-grid">
+            <div class="game-item" onclick="openGame('Apple')">
+                <div class="game-img">🍎</div>
+                <div class="game-name">Apple</div>
+            </div>
+            <div class="game-item" onclick="openGame('Thimbles')">
+                <div class="game-img">🔔</div>
+                <div class="game-name">Thimbles</div>
+            </div>
+            <div class="game-item" onclick="openGame('Kamikaze')">
+                <div class="game-img">🛩️</div>
+                <div class="game-name">Kamikaze</div>
+            </div>
+            <div class="game-item" onclick="openGame('Swamp Land')">
+                <div class="game-img">🐸</div>
+                <div class="game-name">Swamp Land</div>
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <div class="icon-btn" style="border-color: #ef4444; color: #ef4444;">🛩️</div>
+            <div class="icon-btn">🤖</div>
+            <div class="active-users">
+                <div class="green-dot"></div>
+                <span>Taxminiy faollik: <b>~172 faol</b></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- O'YIN SAHIFASI -->
+    <div class="game-page" id="gamePage">
+        <div class="game-nav">
+            <button class="btn-nav" onclick="closeGame()">Orqaga</button>
+            <button class="btn-nav" onclick="resetSignal()">Restart</button>
+        </div>
+
+        <div class="game-display">
+            <div class="game-display-title" id="currentGameTitle">APPLE</div>
+            <div class="signal-screen" id="signalOutput">0</div>
+            <p style="color: #94a3b8; font-size: 13px; margin-bottom: 5px;">Natijani olish uchun SCAN ni bosing</p>
+            <p style="color: #64748b; font-size: 12px;">1 dan 5 gacha</p>
+        </div>
+
+        <button class="btn-scan" id="scanBtn" onclick="generateSignal()">SCAN</button>
+    </div>
+
+    <!-- MODAL 1: LINEBET ID MODAL -->
+    <div class="modal-overlay" id="idModal">
+        <div class="modal-box">
+            <div style="font-size: 40px; margin-bottom: 10px;">💻</div>
+            <div class="modal-title">Linebet ID yozing</div>
+            <input type="number" class="modal-input" placeholder="Linebet ID yozing" id="linebetIdInput">
+            <div class="modal-btns">
+                <button class="btn-modal btn-close" onclick="closeModal('idModal')">Yopish</button>
+                <button class="btn-modal btn-save" onclick="saveId()">Saqlash</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: YANGILIKLAR -->
+    <div class="modal-overlay" id="newsModal">
+        <div class="modal-box">
+            <div style="font-size: 40px; margin-bottom: 10px;">✉️</div>
+            <div class="modal-title">Yangiliklar</div>
+            <p style="color: #94a3b8; font-size: 13px; margin-bottom: 15px; line-height: 1.4;">
+                BE127 Hack ishlashi uchun Linebet hisobingizda 60000 so'mdan kam bo'lmasin!
+            </p>
+            <p style="color: #64748b; font-size: 11px; margin-bottom: 20px;">13/09/2026, 13:53:11</p>
+            <button class="btn-modal btn-save" style="width: 100%;" onclick="closeModal('newsModal')">Yopish</button>
+        </div>
+    </div>
+
+    <!-- MODAL 3: TILNI TANLASH -->
+    <div class="modal-overlay" id="langModal">
+        <div class="modal-box">
+            <div class="modal-title">Tilni tanlang</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+                <button class="modal-input" style="margin: 0; text-align: left;" onclick="closeModal('langModal')">🇺🇿 UZ</button>
+                <button class="modal-input" style="margin: 0; text-align: left;" onclick="closeModal('langModal')">🇷🇺 RU</button>
+                <button class="modal-input" style="margin: 0; text-align: left;" onclick="closeModal('langModal')">🇬🇧 EN</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        if (window.Telegram && window.Telegram.WebApp) {
+            window.Telegram.WebApp.ready();
+            window.Telegram.WebApp.expand();
+        }
+
+        const mainHub = document.getElementById('mainHub');
+        const gamePage = document.getElementById('gamePage');
+        const currentGameTitle = document.getElementById('currentGameTitle');
+        const signalOutput = document.getElementById('signalOutput');
+        const scanBtn = document.getElementById('scanBtn');
+
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        function saveId() {
+            const val = document.getElementById('linebetIdInput').value;
+            if(val) {
+                closeModal('idModal');
+            }
+        }
+
+        function openGame(gameName) {
+            mainHub.style.display = 'none';
+            gamePage.style.display = 'flex';
+            currentGameTitle.innerText = gameName.toUpperCase();
+            resetSignal();
+        }
+
+        function closeGame() {
+            gamePage.style.display = 'none';
+            mainHub.style.display = 'flex';
+        }
+
+        function resetSignal() {
+            signalOutput.innerText = "0";
+        }
+
+        function generateSignal() {
+            scanBtn.disabled = true;
+            scanBtn.innerText = "IZLANMOQDA...";
+            
+            setTimeout(() => {
+                const name = currentGameTitle.innerText;
+                if (name === 'THIMBLES') {
+                    signalOutput.innerText = "Tugun: " + (Math.floor(Math.random() * 3) + 1);
+                } else if (name === 'KAMIKAZE') {
+                    signalOutput.innerText = "x" + (Math.random() * (4.5 - 1.2) + 1.2).toFixed(2);
+                } else {
+                    signalOutput.innerText = "Katak: " + (Math.floor(Math.random() * 5) + 1);
+                }
+                
+                scanBtn.disabled = false;
+                scanBtn.innerText = "SCAN";
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
