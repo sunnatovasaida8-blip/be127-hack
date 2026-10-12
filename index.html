@@ -188,16 +188,31 @@
             align-items: center;
         }
 
+        .tg-footer-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            background: #151d30;
+            border: 1px solid #253352;
+            padding: 6px 12px;
+            border-radius: 12px;
+            color: #38bdf8;
+            font-size: 11px;
+            font-weight: 700;
+            box-shadow: 0 0 10px rgba(42, 139, 242, 0.2);
+        }
+
         .active-users {
             background: #082f49;
             border: 1px solid #0369a1;
-            padding: 8px 14px;
+            padding: 8px 12px;
             border-radius: 20px;
             color: #38bdf8;
-            font-size: 12px;
+            font-size: 11px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .green-dot {
@@ -206,6 +221,166 @@
             background: #22c55e;
             border-radius: 50%;
             box-shadow: 0 0 8px #22c55e;
+        }
+
+        /* O'YIN SAHIFASI */
+        .game-page {
+            display: none;
+            width: 100%;
+            max-width: 380px;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .game-nav {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .btn-nav {
+            background: linear-gradient(135deg, #38bdf8, #2563eb);
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .game-display {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 20px;
+            padding: 15px;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 15px;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-display-title {
+            font-size: 22px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: #38bdf8;
+        }
+
+        /* THIMBLES MODES */
+        .thimbles-mode-btns {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            width: 100%;
+            justify-content: center;
+        }
+        .mode-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            color: #fff;
+        }
+        .btn-green-mode { background: #15803d; }
+        .btn-blue-mode { background: #0284c7; }
+        .mode-btn.inactive { opacity: 0.4; }
+
+        .thimbles-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+            width: 100%;
+        }
+        .thimble-cup {
+            width: 75px;
+            height: 85px;
+            background: linear-gradient(180deg, #d97706, #b45309);
+            border: 2px solid #f59e0b;
+            border-radius: 15px 15px 5px 5px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 10px;
+            font-size: 26px;
+            transition: transform 0.4s ease;
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+        }
+        .thimble-cup.open {
+            transform: translateY(-15px);
+            border-color: #22c55e;
+            box-shadow: 0 0 20px #22c55e;
+        }
+
+        /* APPLE & KAMIKAZE BOARDS */
+        .board-wrap {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+            align-items: center;
+        }
+        .board-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 4px;
+            flex: 1;
+        }
+        .cell {
+            background: #291b11;
+            border: 1px solid #452614;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+        }
+        .cell.active {
+            background: #15803d;
+            border-color: #22c55e;
+            box-shadow: 0 0 8px #22c55e;
+        }
+        .odds-col {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .odd-badge {
+            background: #1e293b;
+            border: 1px solid #eab308;
+            color: #eab308;
+            font-size: 9px;
+            font-weight: 800;
+            padding: 5px 3px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .odd-badge.highlight {
+            background: #15803d;
+            border-color: #22c55e;
+            color: #fff;
+        }
+
+        .btn-scan {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #38bdf8, #2563eb);
+            border: none;
+            border-radius: 14px;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4);
         }
 
         /* MODAL OYNALAR */
@@ -294,76 +469,6 @@
             box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
         }
 
-        /* O'YIN SAHIFASI */
-        .game-page {
-            display: none;
-            width: 100%;
-            max-width: 380px;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .game-nav {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .btn-nav {
-            background: linear-gradient(135deg, #38bdf8, #2563eb);
-            border: none;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .game-display {
-            background: #0f172a;
-            border: 1px solid #1e293b;
-            border-radius: 20px;
-            padding: 20px;
-            width: 100%;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .game-display-title {
-            font-size: 24px;
-            font-weight: 900;
-            margin-bottom: 15px;
-            color: #38bdf8;
-        }
-
-        .signal-screen {
-            font-size: 28px;
-            font-weight: 900;
-            margin: 20px 0;
-            color: #fff;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .btn-scan {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #38bdf8, #2563eb);
-            border: none;
-            border-radius: 14px;
-            color: #ffffff;
-            font-size: 18px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4);
-        }
-
     </style>
 </head>
 <body>
@@ -373,15 +478,15 @@
         <div class="icon-btn" onclick="openModal('idModal')">⚙️</div>
         <div class="status-badge"><div class="status-dot"></div> Online</div>
         <div class="lang-btn" onclick="openModal('langModal')">🌐 <span>UZ</span></div>
-        <div class="icon-btn" onclick="openModal('newsModal')">🔔</div>
+        <a href="https://t.me/BE127BONUS" target="_blank" class="icon-btn">✈️</a>
     </div>
 
     <!-- MAIN APP HUB -->
     <div class="app-card" id="mainHub">
         <div class="card-header">
-            <div class="icon-btn" onclick="openModal('newsModal')">🔔</div>
-            <div class="promo-title">BE127</div>
             <a href="https://t.me/BE127BONUS" target="_blank" class="icon-btn" style="text-decoration: none;">✈️</a>
+            <div class="promo-title">BE127</div>
+            <div style="width: 42px;"></div>
         </div>
 
         <div class="game-grid">
@@ -390,8 +495,8 @@
                 <div class="game-name">Apple</div>
             </div>
             <div class="game-item" onclick="openGame('Thimbles')">
-                <div class="game-img">🔔</div>
-                <div class="game-name">Thimbles</div>
+                <div class="game-img">⚪️</div>
+                <div class="game-name">Thimbles ⚪️</div>
             </div>
             <div class="game-item" onclick="openGame('Kamikaze')">
                 <div class="game-img">🛩️</div>
@@ -403,14 +508,17 @@
             </div>
         </div>
 
-        <!-- POWERD BY & CREATED BY TEXTS -->
+        <!-- BRANDING TEXTS -->
         <div class="branding-section">
             <div class="powered-text">POWERD BY THEEAGLE</div>
             <div class="created-text">CREATED BY THEEAGLE</div>
         </div>
 
         <div class="footer-info">
-            <div class="icon-btn" onclick="openGame('Aviator')">✈️</div>
+            <a href="https://t.me/BE127BONUS" target="_blank" class="tg-footer-btn">
+                <span style="font-size: 16px;">🛫</span>
+                <span>Telegram</span>
+            </a>
             <div class="icon-btn" onclick="openModal('idModal')">💻</div>
             <div class="active-users">
                 <div class="green-dot"></div>
@@ -423,19 +531,19 @@
     <div class="game-page" id="gamePage">
         <div class="game-nav">
             <button class="btn-nav" onclick="closeGame()">Orqaga</button>
-            <button class="btn-nav" onclick="resetSignal()">Restart</button>
+            <button class="btn-nav" onclick="resetSignal()">START</button>
         </div>
 
         <div class="game-display">
             <div class="game-display-title" id="currentGameTitle">APPLE</div>
-            <div class="signal-screen" id="signalOutput">0</div>
-            <p style="color: #94a3b8; font-size: 13px; margin-bottom: 5px;" id="gameHint">Natijani olish uchun SCAN ni bosing</p>
+            <div id="gameBoardContainer" style="width: 100%;"></div>
+            <p style="color: #94a3b8; font-size: 12px; margin-top: 10px;" id="gameHint">START tugmasini bosing</p>
         </div>
 
-        <button class="btn-scan" id="scanBtn" onclick="generateSignal()">SCAN</button>
+        <button class="btn-scan" id="scanBtn" onclick="nextStepSignal()">KEYINGI QATOR</button>
     </div>
 
-    <!-- MODAL 1: LINEBET ID MODAL -->
+    <!-- MODAL 1: LINEBET ID -->
     <div class="modal-overlay" id="idModal">
         <div class="modal-box">
             <div style="font-size: 40px; margin-bottom: 10px;">💻</div>
@@ -449,20 +557,7 @@
         </div>
     </div>
 
-    <!-- MODAL 2: YANGILIKLAR MODALI -->
-    <div class="modal-overlay" id="newsModal">
-        <div class="modal-box">
-            <div style="font-size: 40px; margin-bottom: 10px;">📢</div>
-            <div class="modal-title" style="color: #38bdf8;">MUHIM YANGILIK</div>
-            <div class="modal-body-text">
-                Linebet ilovasini yuklab olib, <b style="color: #38bdf8;">BE127</b> promokodi orqali yangi account oching va hisobingizni kamida <b style="color: #22c55e;">60.000 so'm</b> ga to'ldiring.<br><br>
-                Shunda <b style="color: #38bdf8;">BE127-HACK</b> algoritmi 100% aniq va bexato ishlaydi!
-            </div>
-            <button class="btn-modal btn-save" style="width: 100%;" onclick="closeModal('newsModal')">Tushundim</button>
-        </div>
-    </div>
-
-    <!-- MODAL 3: TILNI TANLASH -->
+    <!-- MODAL 2: TIL -->
     <div class="modal-overlay" id="langModal">
         <div class="modal-box">
             <div class="modal-title">Tilni tanlang</div>
@@ -483,36 +578,31 @@
         const mainHub = document.getElementById('mainHub');
         const gamePage = document.getElementById('gamePage');
         const currentGameTitle = document.getElementById('currentGameTitle');
-        const signalOutput = document.getElementById('signalOutput');
+        const gameBoardContainer = document.getElementById('gameBoardContainer');
         const gameHint = document.getElementById('gameHint');
         const scanBtn = document.getElementById('scanBtn');
         const accountStatus = document.getElementById('accountStatus');
 
-        function openModal(id) {
-            document.getElementById(id).style.display = 'flex';
-        }
+        let currentStep = 0;
+        let thimblesMode = '2.91x'; // '1.45x' yoki '2.91x'
 
-        function closeModal(id) {
-            document.getElementById(id).style.display = 'none';
-        }
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
         function saveId() {
             const val = document.getElementById('linebetIdInput').value;
             if(val) {
                 accountStatus.style.display = 'block';
-                setTimeout(() => {
-                    closeModal('idModal');
-                }, 1200);
-            } else {
-                alert("Iltimos, Linebet ID kiriting!");
-            }
+                setTimeout(() => { closeModal('idModal'); }, 1200);
+            } else { alert("Iltimos, Linebet ID kiriting!"); }
         }
 
         function openGame(gameName) {
             mainHub.style.display = 'none';
             gamePage.style.display = 'flex';
             currentGameTitle.innerText = gameName.toUpperCase();
-            resetSignal();
+            currentStep = 0;
+            renderBoard(gameName);
         }
 
         function closeGame() {
@@ -520,49 +610,121 @@
             mainHub.style.display = 'flex';
         }
 
-        function resetSignal() {
-            signalOutput.innerText = "0";
-            gameHint.innerText = "Natijani olish uchun SCAN ni bosing";
+        function renderBoard(gameName) {
+            gameBoardContainer.innerHTML = '';
+            scanBtn.innerText = "KEYINGI QATOR";
+
+            if (gameName === 'Thimbles') {
+                scanBtn.innerText = "START";
+                gameBoardContainer.innerHTML = `
+                    <div class="thimbles-mode-btns">
+                        <button class="mode-btn btn-green-mode" id="btn145" onclick="setThimblesMode('1.45x')">1.45x (2 shar)</button>
+                        <button class="mode-btn btn-blue-mode" id="btn291" onclick="setThimblesMode('2.91x')">2.91x (1 shar)</button>
+                    </div>
+                    <div class="thimbles-container">
+                        <div class="thimble-cup" id="cup1"></div>
+                        <div class="thimble-cup" id="cup2"></div>
+                        <div class="thimble-cup" id="cup3"></div>
+                    </div>
+                `;
+                gameHint.innerText = "Koeffitsiyentni tanlang va START ni bosing";
+            } 
+            else if (gameName === 'Kamikaze') {
+                const odds = ["x2.5", "x2.0", "x1.6", "x1.4", "x1.2"];
+                let html = '<div class="board-wrap"><div class="board-grid">';
+                for(let i=0; i<25; i++) html += `<div class="cell" id="cell_${i}">🟤</div>`;
+                html += '</div><div class="odds-col">';
+                odds.forEach((o, idx) => html += `<div class="odd-badge" id="odd_${idx}">${o}</div>`);
+                html += '</div></div>';
+                gameBoardContainer.innerHTML = html;
+                gameHint.innerText = "START ni bosing va 1.2x dan boshlang";
+            } 
+            else if (gameName === 'Apple') {
+                const odds = ["x6.71", "x4.02", "x2.41", "x1.93", "x1.56", "x1.23"];
+                let html = '<div class="board-wrap"><div class="board-grid">';
+                for(let i=0; i<30; i++) html += `<div class="cell" id="cell_${i}">🟤</div>`;
+                html += '</div><div class="odds-col">';
+                odds.forEach((o, idx) => html += `<div class="odd-badge" id="odd_${idx}">${o}</div>`);
+                html += '</div></div>';
+                gameBoardContainer.innerHTML = html;
+                gameHint.innerText = "START ni bosing va 1.23x dan boshlang";
+            } else {
+                gameBoardContainer.innerHTML = `<div style="font-size:40px; margin:20px;">🐸</div>`;
+            }
         }
 
-        function generateSignal() {
-            scanBtn.disabled = true;
-            scanBtn.innerText = "IZLANMOQDA...";
-            
-            setTimeout(() => {
-                const name = currentGameTitle.innerText;
-                
-                if (name === 'APPLE') {
-                    const appleOdds = ["x1.23", "x1.56", "x1.93", "x2.41", "x4.02", "x6.71"];
-                    const randomOdd = appleOdds[Math.floor(Math.random() * appleOdds.length)];
-                    signalOutput.innerText = randomOdd;
-                    gameHint.innerText = "Apple of Fortune Signali";
-                } 
-                else if (name === 'THIMBLES') {
-                    const thimblePos = Math.floor(Math.random() * 3) + 1;
-                    const thimbleOdd = Math.random() < 0.5 ? "x1.45" : "x2.91";
-                    signalOutput.innerText = `🔔 ${thimblePos}-angishvona (${thimbleOdd})`;
-                    gameHint.innerText = "Angishvona aylandi va shar topildi!";
-                } 
-                else if (name === 'KAMIKAZE') {
-                    const kamiOdds = ["x1.2", "x1.4", "x1.6", "x2.0", "x2.5"];
-                    const randomKami = kamiOdds[Math.floor(Math.random() * kamiOdds.length)];
-                    signalOutput.innerText = `🛩️ Daraja: ${randomKami}`;
-                    gameHint.innerText = "Kamikaze 5 qatorli signal";
-                } 
-                else if (name === 'AVIATOR') {
-                    const aviatorOdds = (Math.random() * (5.5 - 1.2) + 1.2).toFixed(2);
-                    signalOutput.innerText = `✈️ x${aviatorOdds}`;
-                    gameHint.innerText = "Aviator xavfsiz uqish koeffitsiyenti";
+        function setThimblesMode(mode) {
+            thimblesMode = mode;
+            document.getElementById('btn145').style.opacity = mode === '1.45x' ? '1' : '0.4';
+            document.getElementById('btn291').style.opacity = mode === '2.91x' ? '1' : '0.4';
+            resetSignal();
+        }
+
+        function resetSignal() {
+            currentStep = 0;
+            const name = currentGameTitle.innerText;
+            if(name === 'THIMBLES') {
+                document.querySelectorAll('.thimble-cup').forEach(c => { c.classList.remove('open'); c.innerHTML = ''; });
+                gameHint.innerText = `${thimblesMode} rejimi tanlandi. START ni bosing.`;
+            } else {
+                renderBoard(name);
+            }
+        }
+
+        function nextStepSignal() {
+            const name = currentGameTitle.innerText;
+
+            if (name === 'THIMBLES') {
+                document.querySelectorAll('.thimble-cup').forEach(c => { c.classList.remove('open'); c.innerHTML = ''; });
+                if (thimblesMode === '1.45x') {
+                    // 2 ta shar
+                    const pos1 = 1, pos2 = 3;
+                    document.getElementById(`cup${pos1}`).classList.add('open');
+                    document.getElementById(`cup${pos1}`).innerHTML = '⚪️';
+                    document.getElementById(`cup${pos2}`).classList.add('open');
+                    document.getElementById(`cup${pos2}`).innerHTML = '⚪️';
+                    gameHint.innerText = "1.45x: 2 ta shar ko'rsatildi!";
+                } else {
+                    // 2.91x - 1 ta shar
+                    const pos = Math.floor(Math.random() * 3) + 1;
+                    const cup = document.getElementById(`cup${pos}`);
+                    cup.classList.add('open');
+                    cup.innerHTML = '⚪️';
+                    gameHint.innerText = `2.91x: ${pos}-angishvonada 1 ta shar topildi!`;
                 }
-                else {
-                    signalOutput.innerText = "Katak: " + (Math.floor(Math.random() * 5) + 1);
-                    gameHint.innerText = "Swamp Land Signali";
+            }
+            else if (name === 'APPLE' || name === 'KAMIKAZE') {
+                const maxRows = name === 'APPLE' ? 6 : 5;
+                if (currentStep >= maxRows) {
+                    gameHint.innerText = "Oxirgi qatorga yetib keldingiz! Restart bosing.";
+                    return;
                 }
-                
-                scanBtn.disabled = false;
-                scanBtn.innerText = "SCAN";
-            }, 1000);
+
+                // Eski qatorni tozalash
+                for(let i=0; i<30; i++) {
+                    const el = document.getElementById(`cell_${i}`);
+                    if(el) { el.classList.remove('active'); el.innerHTML = '🟤'; }
+                }
+                for(let i=0; i<maxRows; i++) {
+                    const badge = document.getElementById(`odd_${i}`);
+                    if(badge) badge.classList.remove('highlight');
+                }
+
+                // Joriy qatorni yoritish
+                const col = Math.floor(Math.random() * 5);
+                const cellIndex = currentStep * 5 + col;
+                const cell = document.getElementById(`cell_${cellIndex}`);
+                if(cell) {
+                    cell.classList.add('active');
+                    cell.innerHTML = name === 'APPLE' ? '🍎' : '✈️';
+                }
+
+                const activeOdd = document.getElementById(`odd_${currentStep}`);
+                if(activeOdd) activeOdd.classList.add('highlight');
+
+                gameHint.innerText = `Qator ${currentStep + 1} ko'rsatildi. Keyingisi uchun yana bosing!`;
+                currentStep++;
+            }
         }
     </script>
 </body>
