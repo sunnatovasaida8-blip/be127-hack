@@ -148,7 +148,7 @@
         .game-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 12px;
             width: 100%;
             margin-bottom: 15px;
         }
@@ -169,20 +169,20 @@
 
         .game-img {
             width: 100%;
-            height: 90px;
+            height: 75px;
             background: rgba(30, 41, 59, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
+            font-size: 34px;
         }
 
         .game-name {
             background: #ffffff;
             color: #0f172a;
-            padding: 10px;
+            padding: 8px 10px;
             font-weight: 800;
-            font-size: 14px;
+            font-size: 12px;
             text-align: left;
         }
 
@@ -355,7 +355,7 @@
             box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4);
         }
 
-        /* THIMBLES ASL DIZAYN (ANGISHVONA) */
+        /* THIMBLES ANGISHVONA DIZAYNI */
         .thimble-cup-item {
             width: 75px;
             height: 85px;
@@ -376,6 +376,32 @@
             transform: translateY(-15px);
             border-color: #22c55e;
             box-shadow: 0 0 20px #22c55e;
+        }
+
+        /* MINES GRID */
+        .mines-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+            width: 100%;
+            max-width: 280px;
+            margin: 10px 0;
+        }
+        .mines-cell {
+            background: #1e293b;
+            border: 1px solid #334155;
+            height: 48px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.2s;
+        }
+        .mines-cell.active {
+            background: #065f46;
+            border-color: #10b981;
+            box-shadow: 0 0 10px #10b981;
         }
 
         /* MODALS */
@@ -499,6 +525,14 @@
                 <div class="game-img">🔔</div>
                 <div class="game-name">Thimbles</div>
             </div>
+            <div class="game-item" onclick="openGame('Mines')">
+                <div class="game-img">💎</div>
+                <div class="game-name">Mines 💎</div>
+            </div>
+            <div class="game-item" onclick="openGame('Wild West Gold')">
+                <div class="game-img">🤠</div>
+                <div class="game-name">Wild West Gold</div>
+            </div>
             <div class="game-item" onclick="openGame('Kamikaze')">
                 <div class="game-img">🛩️</div>
                 <div class="game-name">Kamikaze</div>
@@ -546,7 +580,7 @@
 
         <div class="game-display">
             <div class="game-display-title" id="currentGameTitle">APPLE</div>
-            <div id="gameBoardContainer" style="width: 100%;"></div>
+            <div id="gameBoardContainer" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
             <p style="color: #94a3b8; font-size: 12px; margin-top: 10px;" id="gameHint">START tugmasini bosing</p>
         </div>
 
@@ -613,6 +647,7 @@
 
         let currentStep = 0;
         let thimblesMode = '2.91x';
+        let minesCount = 3;
 
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
@@ -650,12 +685,47 @@
             gameBoardContainer.innerHTML = '';
             scanBtn.innerText = "KEYINGI QATOR";
 
-            if (gameName === 'Thimbles') {
+            if (gameName === 'Wild West Gold') {
+                const odds = ["x3.50", "x2.40", "x1.80", "x1.40", "x1.18"];
+                let html = '<div style="display:flex; gap:8px; width:100%; max-width:280px;"><div style="display:flex; flex-direction:column; gap:5px; flex:1;">';
+                for(let r=4; r>=0; r--) {
+                    html += '<div style="display:grid; grid-template-columns:repeat(3,1fr); gap:5px;">';
+                    for(let c=0; c<3; c++) html += `<div style="background:#2d1b0f; border:1px solid #78350f; height:38px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:16px;" id="cell_${r}_${c}">📦</div>`;
+                    html += '</div>';
+                }
+                html += '</div><div style="display:flex; flex-direction:column; gap:5px;">';
+                odds.forEach((o, idx) => {
+                    html += `<div style="background:#1e293b; border:1px solid #f59e0b; color:#f59e0b; font-size:10px; font-weight:800; padding:11px 5px; border-radius:6px;" id="odd_${4-idx}">${o}</div>`;
+                });
+                html += '</div></div>';
+                gameBoardContainer.innerHTML = html;
+                gameHint.innerText = "START ni bosing va 1.18x dan xazinani toping!";
+            }
+            else if (gameName === 'Mines') {
+                scanBtn.innerText = "SIGNAL OLISH";
+                let html = `
+                    <div style="display:flex; gap:8px; margin-bottom:12px; align-items:center;">
+                        <span style="font-size:12px; color:#cbd5e1; font-weight:bold;">Minalar:</span>
+                        <select id="minesSelect" style="background:#1e293b; border:1px solid #334155; color:#fff; padding:6px 12px; border-radius:8px; font-weight:bold; outline:none;" onchange="minesCount = parseInt(this.value)">
+                            <option value="1">1 Mina 💣</option>
+                            <option value="3" selected>3 Mina 💣</option>
+                            <option value="5">5 Mina 💣</option>
+                        </select>
+                    </div>
+                    <div class="mines-grid">`;
+                for(let i=0; i<25; i++) {
+                    html += `<div class="mines-cell" id="mine_${i}">🟦</div>`;
+                }
+                html += `</div>`;
+                gameBoardContainer.innerHTML = html;
+                gameHint.innerText = "Minalar sonini tanlang va SIGNAL OLISH ni bosing";
+            }
+            else if (gameName === 'Thimbles') {
                 scanBtn.innerText = "START";
                 gameBoardContainer.innerHTML = `
                     <div style="display:flex; gap:10px; margin-bottom:15px; width:100%;">
-                        <button class="btn-modal btn-save" style="background:#15803d;" id="btn145" onclick="setThimblesMode('1.45x')">1.45x (2 shar)</button>
-                        <button class="btn-modal btn-save" style="background:#0284c7;" id="btn291" onclick="setThimblesMode('2.91x')">2.91x (1 shar)</button>
+                        <button class="btn-modal btn-save" style="background:${thimblesMode === '1.45x' ? '#15803d' : '#1e293b'};" id="btn145" onclick="setThimblesMode('1.45x')">1.45x (2 shar)</button>
+                        <button class="btn-modal btn-save" style="background:${thimblesMode === '2.91x' ? '#0284c7' : '#1e293b'};" id="btn291" onclick="setThimblesMode('2.91x')">2.91x (1 shar)</button>
                     </div>
                     <div style="display:flex; justify-content:center; gap:15px; margin:15px 0;">
                         <div class="thimble-cup-item" id="cup1">1</div>
@@ -663,7 +733,7 @@
                         <div class="thimble-cup-item" id="cup3">3</div>
                     </div>
                 `;
-                gameHint.innerText = "Rejimni tanlang va START ni bosing";
+                gameHint.innerText = `${thimblesMode} rejimi tanlangan. START ni bosing`;
             } 
             else if (gameName === 'Kamikaze') {
                 const odds = ["x2.5", "x2.0", "x1.6", "x1.4", "x1.2"];
@@ -730,7 +800,62 @@
         function nextStepSignal() {
             const name = currentGameTitle.innerText;
 
-            if (name === 'AVIATOR') {
+            if (name === 'WILD WEST GOLD') {
+                const maxRows = 5;
+                if (currentStep >= maxRows) {
+                    gameHint.innerText = "Wild West xazinasi yakunlandi! Restart bosing.";
+                    return;
+                }
+
+                for(let r=0; r<maxRows; r++) {
+                    for(let c=0; c<3; c++) {
+                        const el = document.getElementById(`cell_${r}_${c}`);
+                        if(el) { el.style.background = '#2d1b0f'; el.innerHTML = '📦'; }
+                    }
+                    const badge = document.getElementById(`odd_${r}`);
+                    if(badge) badge.style.background = '#1e293b';
+                }
+
+                const col = Math.floor(Math.random() * 3);
+                const cell = document.getElementById(`cell_${currentStep}_${col}`);
+                if(cell) {
+                    cell.style.background = '#854d0e';
+                    cell.innerHTML = '💰';
+                }
+
+                const activeOdd = document.getElementById(`odd_${currentStep}`);
+                if(activeOdd) activeOdd.style.background = '#854d0e';
+
+                gameHint.innerText = `Qator ${currentStep + 1} xazinasi topildi! 💰`;
+                currentStep++;
+            }
+            else if (name === 'MINES') {
+                for(let i=0; i<25; i++) {
+                    const cell = document.getElementById(`mine_${i}`);
+                    if(cell) {
+                        cell.classList.remove('active');
+                        cell.innerHTML = '🟦';
+                    }
+                }
+
+                const safeCount = Math.floor(Math.random() * 3) + 3;
+                const selected = [];
+                while(selected.length < safeCount) {
+                    const r = Math.floor(Math.random() * 25);
+                    if(!selected.includes(r)) selected.push(r);
+                }
+
+                selected.forEach(idx => {
+                    const cell = document.getElementById(`mine_${idx}`);
+                    if(cell) {
+                        cell.classList.add('active');
+                        cell.innerHTML = '💎';
+                    }
+                });
+
+                gameHint.innerText = `${safeCount} ta xavfsiz olmos (💎) ko'rsatildi!`;
+            }
+            else if (name === 'AVIATOR') {
                 scanBtn.disabled = true;
                 const statusTxt = document.getElementById('aviatorStatusText');
                 const oddVal = document.getElementById('aviatorOddVal');
@@ -746,19 +871,24 @@
                 }, 1000);
             }
             else if (name === 'THIMBLES') {
-                document.getElementById('cup1').classList.remove('open');
-                document.getElementById('cup1').innerHTML = '1';
-                document.getElementById('cup2').classList.remove('open');
-                document.getElementById('cup2').innerHTML = '2';
-                document.getElementById('cup3').classList.remove('open');
-                document.getElementById('cup3').innerHTML = '3';
+                for(let i=1; i<=3; i++) {
+                    const cup = document.getElementById(`cup${i}`);
+                    cup.classList.remove('open');
+                    cup.innerHTML = i.toString();
+                }
 
                 if (thimblesMode === '1.45x') {
-                    document.getElementById('cup1').classList.add('open');
-                    document.getElementById('cup1').innerHTML = '⚪️';
-                    document.getElementById('cup3').classList.add('open');
-                    document.getElementById('cup3').innerHTML = '⚪️';
-                    gameHint.innerText = "1.45x: 2 ta shar joylashuvi ko'rsatildi!";
+                    const indices = [1, 2, 3];
+                    const emptyIndex = Math.floor(Math.random() * 3);
+                    indices.splice(emptyIndex, 1);
+
+                    indices.forEach(idx => {
+                        const cup = document.getElementById(`cup${idx}`);
+                        cup.classList.add('open');
+                        cup.innerHTML = '⚪️';
+                    });
+
+                    gameHint.innerText = `1.45x: ${indices[0]}- va ${indices[1]}-angishvonada shar bor!`;
                 } else {
                     const pos = Math.floor(Math.random() * 3) + 1;
                     const cup = document.getElementById(`cup${pos}`);
